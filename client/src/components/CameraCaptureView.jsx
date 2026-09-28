@@ -17,6 +17,7 @@ import {
   ChevronUp,
   Power
 } from 'lucide-react'
+import { api } from '@/lib/api'
 
 export function CameraCaptureView({
   captureToken,
@@ -215,12 +216,7 @@ export function CameraCaptureView({
       formData.append('longitude', coords?.[0] || 72.5189)
       formData.append('category', category || 'POTHOLE')
 
-      const response = await fetch('/api/verification/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      const data = await response.json()
+      const data = await api.uploadEvidence(formData)
       if (data.success) {
         setUploadResult(data)
         if (onCaptureSuccess) {

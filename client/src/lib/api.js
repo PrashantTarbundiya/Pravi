@@ -6,7 +6,7 @@ const getApiBase = () => {
   return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`
 }
 
-const API_BASE = getApiBase()
+export const API_BASE = getApiBase()
 
 export async function fetchApi(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`
@@ -41,6 +41,18 @@ export const api = {
 
   requestCameraToken: (coords) => fetchApi('/verification/token', { method: 'POST', body: JSON.stringify({ coordinates: coords }) }),
   getAuditQueue: () => fetchApi('/verification/audit-queue'),
+  uploadEvidence: async (formData) => {
+    const url = `${API_BASE}/verification/upload`
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+    if (!response.ok) {
+      const errorBody = await response.json().catch(() => ({}))
+      throw new Error(errorBody.message || `API error ${response.status}`)
+    }
+    return response.json()
+  },
 
   getInspections: (params = '') => fetchApi(`/inspections${params ? `?${params}` : ''}`),
   createInspection: (data) => fetchApi('/inspections', { method: 'POST', body: JSON.stringify(data) }),
