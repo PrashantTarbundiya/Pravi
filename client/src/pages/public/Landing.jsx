@@ -145,7 +145,7 @@ export default function Landing() {
               </div>
               <h3 className="font-serif text-xl text-[#141413]">Corridor Geofence</h3>
               <p className="text-xs text-[#3d3d3a] leading-relaxed">
-                Precise Haversine formula calculation compares mobile GPS coordinates against state highway and bridge chainages ($\le 50\text{m}$).
+                Precise Haversine formula calculation compares mobile GPS coordinates against state highway and bridge chainages (≤ 50m).
               </p>
             </div>
 
