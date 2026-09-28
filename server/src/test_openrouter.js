@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename)
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 dotenv.config() // fallback
 
-const apiKey = process.env.OPENROUTER_API_KEY || "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"
+const apiKey = process.env.OPENROUTER_API_KEY
 
 console.log("Using API Key:", apiKey ? `${apiKey.substring(0, 14)}...` : "NONE")
 
